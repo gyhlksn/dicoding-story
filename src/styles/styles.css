@@ -701,6 +701,103 @@ header {
   font-size: 1rem;
 }
 
+.new-form__title__container > :not([hidden]) ~ :not([hidden]),
+.new-form__description__container > :not([hidden]) ~ :not([hidden]),
+.new-form__documentations__container > :not([hidden]) ~ :not([hidden]),
+.new-form__location__container > :not([hidden]) ~ :not([hidden]) {
+  margin-block-start: 10px;
+}
+
+/* New Documentations */
+.new-form__documentations__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.new-form__camera__container {
+  padding: 20px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+
+  display: none;
+}
+
+.new-form__camera__container.open {
+  display: block;
+}
+
+.new-form__camera__video {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+}
+
+.new-form__camera__canvas {
+  display: none;
+}
+
+.new-form__camera__tools {
+  margin-block: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px 16px;
+}
+
+.new-form__documentations__outputs {
+  list-style: none;
+
+  display: grid;
+  grid-template-columns: repeat(1, minmax(200px, 1fr));
+  justify-content: center;
+  gap: 16px;
+}
+
+.new-form__documentations__outputs-item__delete-btn {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+
+  cursor: pointer;
+}
+
+.new-form__documentations__outputs-item__delete-btn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition: 150ms ease-in-out;
+}
+
+.new-form__documentations__outputs-item__delete-btn:hover img {
+  scale: 1.05;
+}
+
+/* New Locations */
+.new-form__location__map__container,
+.new-form__location__map {
+  height: 400px;
+  position: relative;
+}
+
+.new-form__location__map__container {
+  background-color: darkgray;
+}
+
+.new-form__location__lat-lng {
+  margin-block: 16px 8px;
+
+  display: flex;
+  gap: 10px;
+}
+/* END OF NEW REPORT FORM */
+
 /* FOOTER */
 footer {
   margin-block-start: 50px;

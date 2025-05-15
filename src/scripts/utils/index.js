@@ -11,6 +11,25 @@ export function sleep(time = 1000) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
+export async function createCarousel(containerElement, options = {}) {
+  const { tns } = await import('tiny-slider');
+
+  return tns({
+    container: containerElement,
+    mouseDrag: true,
+    swipeAngle: false,
+    speed: 600,
+
+    nav: true,
+    navPosition: 'bottom',
+
+    autoplay: false,
+    controls: false,
+
+    ...options,
+  });
+}
+
 export function convertBlobToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -69,4 +88,22 @@ export function transitionHelper({ skipTransition = false, updateDOM }) {
   }
 
   return document.startViewTransition(updateDOM);
+}
+
+export async function registerServiceWorker() {
+  if (!isServiceWorkerAvailable()) {
+    console.log('Service Worker API unsupported');
+    return;
+  }
+ 
+  try {
+    const registration = await navigator.serviceWorker.register('/sw.bundle.js');
+    console.log('Service worker telah terpasang', registration);
+  } catch (error) {
+    console.log('Failed to install service worker:', error);
+  }
+}
+
+export function isServiceWorkerAvailable() {
+  return 'serviceWorker' in navigator;
 }

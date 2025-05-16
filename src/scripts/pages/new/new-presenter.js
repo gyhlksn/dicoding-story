@@ -12,7 +12,7 @@ export default class NewPresenter {
     try {
       await this.#view.initialMap();
     } catch (error) {
-      console.error('showNewFormMap: error:', error);
+      console.error("showNewFormMap: error:", error);
     } finally {
       this.#view.hideMapLoading();
     }
@@ -30,17 +30,25 @@ export default class NewPresenter {
       const response = await this.#model.storeNewStory(data);
 
       if (!response.ok) {
-        console.error('postNewStory: response:', response);
+        console.error("postNewStory: response:", response);
         this.#view.storeFailed(response.message);
         return;
       }
 
       // No need to wait response
+      const storyId = response?.data?.id;
+      if (!storyId) {
+        console.error("postNewStory: missing story id", response);
+        this.#view.storeFailed("Failed to get story ID from response.");
+        return;
+      }
+      this.#notifyToAllUser(storyId);
+
       this.#notifyToAllUser(response.data.id);
 
       this.#view.storeSuccessfully(response.message, response.data);
     } catch (error) {
-      console.error('postNewStory: error:', error);
+      console.error("postNewStory: error:", error);
       this.#view.storeFailed(error.message);
     } finally {
       this.#view.hideSubmitLoadingButton();
@@ -49,14 +57,16 @@ export default class NewPresenter {
 
   async #notifyToAllUser(storyId) {
     try {
-      const response = await this.#model.sendStoryToAllUserViaNotification(storyId);
+      const response = await this.#model.sendStoryToAllUserViaNotification(
+        storyId
+      );
       if (!response.ok) {
-        console.error('#notifyToAllUser: response:', response);
+        console.error("#notifyToAllUser: response:", response);
         return false;
       }
       return true;
     } catch (error) {
-      console.error('#notifyToAllUser: error:', error);
+      console.error("#notifyToAllUser: error:", error);
       return false;
     }
   }

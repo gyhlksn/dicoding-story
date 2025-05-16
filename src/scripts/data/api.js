@@ -8,13 +8,16 @@ const ENDPOINTS = {
   MY_USER_INFO: `${BASE_URL}/users/me`,
 
   // Stories
-  STORIES_LIST: `${BASE_URL}/stories`,
+  STORY_LIST: `${BASE_URL}/stories`,
   STORY_DETAIL: (id) => `${BASE_URL}/stories/${id}`,
   STORE_NEW_STORY: `${BASE_URL}/stories`,
 
   // Subscribe
   SUBSCRIBE: `${BASE_URL}/notifications/subscribe`,
   UNSUBSCRIBE: `${BASE_URL}/notifications/subscribe`,
+    SEND_STORY_TO_ME: (storyId) => `${BASE_URL}/stories/${storyId}/notify-me`,
+    SEND_STORY_TO_USER: (storyId) => `${BASE_URL}/stories/${storyId}/notify`,
+    SEND_STORY_TO_ALL_USER: (storyId) => `${BASE_URL}/stories/${storyId}/notify-all`,
 
 };
 
@@ -67,7 +70,7 @@ export async function getMyUserInfo() {
 export async function getAllStories() {
   const accessToken = getAccessToken();
 
-  const fetchResponse = await fetch(ENDPOINTS.STORIES_LIST, {
+  const fetchResponse = await fetch(ENDPOINTS.STORY_LIST, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   const json = await fetchResponse.json();
@@ -104,8 +107,8 @@ export async function storeNewStory({
   formData.set('description', description);
   formData.set('lat', lat);
   formData.set('lon', lon);
-  photo.forEach((evidenceImage) => {
-    formData.append('photo', evidenceImage);
+  photo.forEach((photo) => {
+    formData.append('photo', photo);
   });
 
   const fetchResponse = await fetch(ENDPOINTS.STORE_NEW_STORY, {

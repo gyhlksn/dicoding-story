@@ -1,7 +1,7 @@
 {
-  "id": "/#/",
+  "id": "/?source=pwa#/",
   "scope": "/",
-  "start_url": "/#/",
+  "start_url": "/?source=pwa#/",
   "name": "DicodingStory App",
   "short_name": "DicodingStory",
   "description": "DicodingStory App is a simple and interactive platform for sharing personal stories and memorable moments with photos, descriptions, and location details.",
@@ -48,19 +48,19 @@
   ],
   "screenshots": [
     {
-      "src": "images/screenshots/CityCareApp_001.png",
+      "src": "images/screenshots/DicodingStoryApp_001.png",
       "sizes": "1920x1043",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "images/screenshots/CityCareApp_002.png",
+      "src": "images/screenshots/DicodingStoryApp_002.png",
       "sizes": "1920x1043",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "images/screenshots/CityCareApp_003.png",
+      "src": "images/screenshots/DicodingStoryApp_003.png",
       "sizes": "1920x1043",
       "type": "image/png",
       "form_factor": "wide"

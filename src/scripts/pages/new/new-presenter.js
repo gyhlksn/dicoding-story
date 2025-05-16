@@ -18,12 +18,12 @@ export default class NewPresenter {
     }
   }
 
-  async postNewStory({ description, evidenceImages, latitude, longitude }) {
+  async postNewStory({ description, photo, latitude, longitude }) {
     this.#view.showSubmitLoadingButton();
     try {
       const data = {
         description: description,
-        photo: evidenceImages,
+        photo: photo,
         lat: latitude,
         lon: longitude,
       };

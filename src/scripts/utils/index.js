@@ -1,34 +1,15 @@
+export function sleep(time = 1000) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
 export function showFormattedDate(date, locale = 'en-US', options = {}) {
   return new Date(date).toLocaleDateString(locale, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
     ...options,
-  });
-}
-
-export function sleep(time = 1000) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
-
-export async function createCarousel(containerElement, options = {}) {
-  const { tns } = await import('tiny-slider');
-
-  return tns({
-    container: containerElement,
-    mouseDrag: true,
-    swipeAngle: false,
-    speed: 600,
-
-    nav: true,
-    navPosition: 'bottom',
-
-    autoplay: false,
-    controls: false,
-
-    ...options,
-  });
-}
+  });  
+}  
 
 export function convertBlobToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -71,9 +52,9 @@ export function convertBase64ToUint8Array(base64String) {
 }
 
 export function setupSkipToContent(element, mainContent) {
-  element.addEventListener('click', () => {
-    mainContent.focus();
-  });
+  element.addEventListener('click', () => 
+    mainContent.focus()
+  );
 }
 
 export function transitionHelper({ skipTransition = false, updateDOM }) {
@@ -90,20 +71,20 @@ export function transitionHelper({ skipTransition = false, updateDOM }) {
   return document.startViewTransition(updateDOM);
 }
 
+export function isServiceWorkerAvailable() {
+  return 'serviceWorker' in navigator;
+}
+
 export async function registerServiceWorker() {
   if (!isServiceWorkerAvailable()) {
     console.log('Service Worker API unsupported');
     return;
   }
- 
+
   try {
     const registration = await navigator.serviceWorker.register('/sw.bundle.js');
     console.log('Service worker telah terpasang', registration);
   } catch (error) {
-    console.log('Failed to install service worker:', error);
+    console.error('Failed to install service worker:', error);
   }
-}
-
-export function isServiceWorkerAvailable() {
-  return 'serviceWorker' in navigator;
 }

@@ -1,4 +1,4 @@
-import { storyMapper } from "../../data/api-mapper.js";
+import { storyMapper } from '../../data/api-mapper.js';
 
 export default class StoryDetailPresenter {
   #storyId;
@@ -28,17 +28,16 @@ export default class StoryDetailPresenter {
     this.#view.showStoryDetailLoading();
     try {
       const response = await this.#apiModel.getStoryById(this.#storyId);
-      
+
       if (!response.ok) {
-        
         console.error('showStoryDetail: response:', response);
         this.#view.populateStoryDetailError(response.message);
         return;
       }
-      
+
       const story = await storyMapper(response.story);
-      console.log(Story); // for debugging purpose, remove after checking it
-      
+      console.log(story); // for debugging purpose, remove after checking it
+
       this.#view.populateStoryDetailAndInitialMap(response.message, story);
     } catch (error) {
       console.error('showStoryDetail: error:', error);
@@ -65,6 +64,7 @@ export default class StoryDetailPresenter {
     try {
       const story = await this.#apiModel.getStoryById(this.#storyId);
       await this.#dbModel.putStory(story.data);
+
       this.#view.saveToBookmarkSuccessfully('Success to save to bookmark');
     } catch (error) {
       console.error('saveStory: error:', error);
@@ -82,17 +82,17 @@ export default class StoryDetailPresenter {
       this.#view.removeFromBookmarkFailed(error.message);
     }
   }
- 
+
   async showSaveButton() {
     if (this.#isStorySaved()) {
       this.#view.renderRemoveButton();
       return;
     }
- 
+
     this.#view.renderSaveButton();
   }
 
-  async #isStorySaved() {
-    return !!(await this.#dbModel.getStoryById(this.#storyId));
+  #isStorySaved() {
+    return false;
   }
 }

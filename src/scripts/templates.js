@@ -9,12 +9,13 @@ export function generateLoaderTemplate() {
 export function generateLoaderAbsoluteTemplate() {
   return `
     <div class="loader loader-absolute"></div>
-  `;
-}
-
-export function generateMainNavigationListTemplate() {
-  return `
+    `;
+  }
+  
+  export function generateMainNavigationListTemplate() {
+    return `
     <li><a id="stories-list-button" class="stories-list-button" href="#/">Dicoding Story</a></li>
+    <li><a id="bookmark-button" class="bookmark-button" href="#/bookmark">Archived</a></li>
   `;
 }
 
@@ -38,7 +39,7 @@ export function generateStoriesListEmptyTemplate() {
   return `
     <div id="stories-list-empty" class="stories-list__empty">
       <h2>No stories available</h2>
-      <p>Currently, there are no reports of public facility damage to display.</p>
+      <p>At the moment, there are no stories to display.</p>
     </div>
   `;
 }
@@ -89,10 +90,22 @@ export function generateStoriesItemTemplate({
         </div>
         <div class="story-item__more-info"></div>
         <a class="btn story-item__read-more" href="#/stories/${id}">
-          Selengkapnya <i class="fas fa-arrow-right"></i>
+          More Info <i class="fas fa-arrow-right"></i>
         </a>
       </div>
     </div>
+  `;
+}
+
+export function generateStoriesDetailImageTemplate(imageUrl = null, alt = '') {
+  if (!imageUrl) {
+    return `
+      <img class="story-detail__image" src="images/placeholder-image.jpg" alt="Placeholder Image">
+    `;
+  }
+
+  return `
+    <img class="story-detail__image" src="${imageUrl}" alt="${alt}">
   `;
 }
 
@@ -143,14 +156,23 @@ export function generateStoriesDetailTemplate({
             ${description}
           </div>
         </div>
-      </div>
-      <div class="story-detail__body__map__container">
+        <div class="story-detail__body__map__container">
           <h2 class="story-detail__map__title">Location Map</h2>
           <div class="story-detail__map__container">
             <div id="map" class="story-detail__map"></div>
             <div id="map-loading-container"></div>
           </div>
         </div>
+
+        <hr>
+  
+        <div class="story-detail__body__actions__container">
+          <h2>Action</h2>
+          <div class="story-detail__actions__buttons">
+            <div id="save-actions-container"></div>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }

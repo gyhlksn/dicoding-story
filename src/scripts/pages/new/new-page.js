@@ -6,9 +6,9 @@ import Camera from "../../utils/camera";
 import Map from "../../utils/map";
 
 export default class NewPage {
-  #presenter;
-  #form;
-  #camera;
+  #presenter = null;
+  #form = null;
+  #camera = null;
   #isCameraOpen = false;
   #takenDocumentations = [];
   #map = null;
@@ -168,7 +168,7 @@ export default class NewPage {
         if (this.#isCameraOpen) {
           event.currentTarget.textContent = "Close";
           this.#setupCamera();
-          await this.#camera.launch();
+          this.#camera.launch();
 
           return;
         }

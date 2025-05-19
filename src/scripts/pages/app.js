@@ -131,6 +131,7 @@ export default class App {
     const transition = transitionHelper({
       updateDOM: async () => {
         this.#content.innerHTML = await page.render();
+        console.log('Page Content', await page.render());
         page.afterRender();
       },
     });

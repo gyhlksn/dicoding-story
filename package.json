@@ -1,7 +1,7 @@
 {
-  "name": "app-starter-project-with-webpack",
+  "name": "dicodingstoryapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "DicodingStory App is a simple and interactive platform for sharing personal stories and memorable moments with photos, descriptions, and location details.",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "start-dev": "webpack serve --config webpack.dev.js",
@@ -30,6 +30,7 @@
     "idb": "^8.0.3",
     "leaflet": "^1.9.4",
     "tiny-slider": "^2.9.4",
+    "web-push": "^3.6.7",
     "workbox-cacheable-response": "^7.3.0",
     "workbox-precaching": "^7.3.0",
     "workbox-routing": "^7.3.0",

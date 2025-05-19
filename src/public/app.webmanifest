@@ -66,7 +66,7 @@
       "form_factor": "wide"
     },
     {
-      "src": "images/screenshots/CityCareApp_004.png",
+      "src": "images/screenshots/DicodingStoryApp_004.png",
       "sizes": "1080x2280",
       "type": "image/png",
       "form_factor": "narrow"
@@ -87,9 +87,9 @@
 
   "shortcuts": [
     {
-      "name": "Laporan Baru",
-      "short_name": "Baru",
-      "description": "Membuat laporan kerusakan baru.",
+      "name": "New Story",
+      "short_name": "New",
+      "description": "Creating a new story",
       "url": "/?source=pwa#/new",
       "icons": [
         {
@@ -100,9 +100,9 @@
       ]
     },
     {
-      "name": "Laporan Tersimpan",
-      "short_name": "Tersimpan",
-      "description": "Lihat daftar laporan tersimpan.",
+      "name": "Saved Stories",
+      "short_name": "Saved",
+      "description": "Show saved stories",
       "url": "/?source=pwa#/bookmark",
       "icons": [
         {

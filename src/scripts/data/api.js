@@ -107,8 +107,8 @@ export async function storeNewStory({
   formData.set('description', description);
   formData.set('lat', lat);
   formData.set('lon', lon);
-  photo.forEach((photo) => {
-    formData.append('photo', photo);
+  photo.forEach((evidenceImage) => {
+    formData.append('photo', evidenceImage);
   });
 
   const fetchResponse = await fetch(ENDPOINTS.STORE_NEW_STORY, {
@@ -161,62 +161,6 @@ export async function unsubscribePushNotification({ endpoint }) {
   });
   const json = await fetchResponse.json();
  
-  return {
-    ...json,
-    ok: fetchResponse.ok,
-  };
-}
-
-export async function sendStoryToMeViaNotification(storyId) {
-  const accessToken = getAccessToken();
-
-  const fetchResponse = await fetch(ENDPOINTS.SEND_STORY_TO_ME(storyId), {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  const json = await fetchResponse.json();
-
-  return {
-    ...json,
-    ok: fetchResponse.ok,
-  };
-}
-
-export async function sendStoryToUserViaNotification(storyId, { userId }) {
-  const accessToken = getAccessToken();
-  const data = JSON.stringify({
-    userId,
-  });
-
-  const fetchResponse = await fetch(ENDPOINTS.SEND_STORY_TO_USER(storyId), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`,
-    },
-    body: data,
-  });
-  const json = await fetchResponse.json();
-
-  return {
-    ...json,
-    ok: fetchResponse.ok,
-  };
-}
-
-export async function sendStoryToAllUserViaNotification(storyId) {
-  const accessToken = getAccessToken();
-
-  const fetchResponse = await fetch(ENDPOINTS.SEND_STORY_TO_ALL_USER(storyId), {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  const json = await fetchResponse.json();
-
   return {
     ...json,
     ok: fetchResponse.ok,

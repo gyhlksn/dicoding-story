@@ -46,7 +46,7 @@ registerRoute(
     return baseUrl.origin === url.origin && request.destination !== 'image';
   },
   new NetworkFirst({
-    cacheName: 'dicodingstory-api',
+    cacheName: 'dicoding-story-api',
   }),
 );
 
@@ -56,7 +56,7 @@ registerRoute(
     return baseUrl.origin === url.origin && request.destination === 'image';
   },
   new StaleWhileRevalidate({
-    cacheName: 'dicodingstory-api-images',
+    cacheName: 'dicoding-story-api-images',
   }),
 );
 

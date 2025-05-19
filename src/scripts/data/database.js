@@ -18,7 +18,7 @@ const Database = {
       throw new Error('`id` is required to save.');
     }
 
-    return (await dbPromise).add(OBJECT_STORE_NAME, story);
+    return (await dbPromise).put(OBJECT_STORE_NAME, story);
   },
 
   async getStoryById(id) {

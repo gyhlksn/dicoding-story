@@ -52,7 +52,7 @@ export default class HomePage {
     .reduce((accumulator, story) => {
       const coordinate = [story.lat, story.lon];
       this.#map.addMarker(coordinate, { alt: story.name }, { content: story.name });
-  
+
       return accumulator.concat(
         generateStoriesItemTemplate({
           ...story,

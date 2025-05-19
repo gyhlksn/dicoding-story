@@ -35,16 +35,7 @@ export default class NewPresenter {
         return;
       }
 
-      // No need to wait response
-      const storyId = response?.data?.id;
-      if (!storyId) {
-        console.error("postNewStory: missing story id", response);
-        this.#view.storeFailed("Failed to get story ID from response.");
-        return;
-      }
-      this.#notifyToAllUser(storyId);
-
-      this.#notifyToAllUser(response.data.id);
+      this.#notifyToAllUser(response.data);
 
       this.#view.storeSuccessfully(response.message, response.data);
     } catch (error) {
@@ -54,19 +45,19 @@ export default class NewPresenter {
       this.#view.hideSubmitLoadingButton();
     }
   }
-
+  
   async #notifyToAllUser(storyId) {
     try {
-      const response = await this.#model.sendStoryToAllUserViaNotification(
-        storyId
-      );
+      const response = await this.#model.sendStoryToAllUserViaNotification(storyId);
+
       if (!response.ok) {
-        console.error("#notifyToAllUser: response:", response);
+        console.error('#notifyToAllUser: response:', response);
         return false;
       }
+
       return true;
     } catch (error) {
-      console.error("#notifyToAllUser: error:", error);
+      console.error('#notifyToAllUser: error:', error);
       return false;
     }
   }

@@ -119,3 +119,18 @@ export async function unsubscribe() {
     console.error('unsubscribe: error:', error);
   }
 }
+
+export const NotificationHelper = {
+  sendPushNotification(title, options = {}) {
+    if (!('Notification' in window)) return;
+
+    navigator.serviceWorker.ready.then((registration) => {
+      registration.showNotification(title, {
+        ...options,
+        icon: '/images/icon-192x192.png',
+        badge: '/images/icon-512x512.png',
+        vibrate: [100, 50, 100],
+      });
+    });
+  },
+};

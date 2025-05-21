@@ -1,5 +1,5 @@
 import { openDB } from 'idb';
- 
+
 const DATABASE_NAME = 'dicoding-story';
 const DATABASE_VERSION = 1;
 const OBJECT_STORE_NAME = 'saved-stories';

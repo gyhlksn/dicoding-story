@@ -1,3 +1,5 @@
+import { NotificationHelper } from '../../utils/notification-helper.js';
+
 export default class NewPresenter {
   #view;
   #model;
@@ -12,7 +14,7 @@ export default class NewPresenter {
     try {
       await this.#view.initialMap();
     } catch (error) {
-      console.error("showNewFormMap: error:", error);
+      console.error('showNewFormMap: error:', error);
     } finally {
       this.#view.hideMapLoading();
     }
@@ -30,35 +32,38 @@ export default class NewPresenter {
       const response = await this.#model.storeNewStory(data);
 
       if (!response.ok) {
-        console.error("postNewStory: response:", response);
+        console.error('postNewStory: response:', response);
         this.#view.storeFailed(response.message);
         return;
       }
 
-      this.#notifyToAllUser(response.data);
+      NotificationHelper.sendPushNotification('Story berhasil dikirim!', {
+        body: 'Terima kasih sudah membagikan ceritamu.',
+      });
 
       this.#view.storeSuccessfully(response.message, response.data);
     } catch (error) {
-      console.error("postNewStory: error:", error);
+      console.error('postNewStory: error:', error);
       this.#view.storeFailed(error.message);
     } finally {
       this.#view.hideSubmitLoadingButton();
     }
+      // this.#notifyToAllUser(response.data);
   }
-  
-  async #notifyToAllUser(storyId) {
-    try {
-      const response = await this.#model.sendStoryToAllUserViaNotification(storyId);
 
-      if (!response.ok) {
-        console.error('#notifyToAllUser: response:', response);
-        return false;
-      }
+  // async #notifyToAllUser(storyId) {
+  //   try {
+  //     const response = await this.#model.sendStoryToAllUserViaNotification(storyId);
 
-      return true;
-    } catch (error) {
-      console.error('#notifyToAllUser: error:', error);
-      return false;
-    }
-  }
+  //     if (!response.ok) {
+  //       console.error('#notifyToAllUser: response:', response);
+  //       return false;
+  //     }
+
+  //     return true;
+  //   } catch (error) {
+  //     console.error('#notifyToAllUser: error:', error);
+  //     return false;
+  //   }
+  // }
 }

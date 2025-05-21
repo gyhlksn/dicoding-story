@@ -42,33 +42,34 @@ export default class BookmarkPage {
   }
 
   populateBookmarkedStories(message, stories) {
-    if (stories.length <= 0) {
-      this.populateBookmarkedStoriesListEmpty();
-      return;
+  if (stories.length <= 0) {
+    this.populateBookmarkedStoriesListEmpty();
+    return;
+  }
+
+  const html = stories.reduce((accumulator, story) => {
+    if (this.#map) {
+      const coordinate = [story.location.latitude, story.location.longitude];
+      const markerOptions = { alt: story.title };
+      const popupOptions = { content: story.title };
+
+      this.#map.addMarker(coordinate, markerOptions, popupOptions);
     }
 
-    const html = stories.reduce((accumulator, story) => {
-      if (this.#map) {
-        const coordinate = [story.location.latitude, story.location.longitude];
-        const markerOptions = { alt: story.title };
-        const popupOptions = { content: story.title };
+    return accumulator.concat(
+      generateStoriesItemTemplate({
+        ...story,
+        // Pastikan properti location yang diteruskan ke template adalah string placeName
+        location: story.location.placeName, // <-- PERUBAHAN DI SINI
+        storyerName: story.storyer.name,
+      }),
+    );
+  }, '');
 
-        this.#map.addMarker(coordinate, markerOptions, popupOptions);
-      }
-
-      return accumulator.concat(
-        generateStoriesItemTemplate({
-          ...story,
-          placeNameLocation: story.location.placeName,
-          storyerName: story.storyer.name,
-        }),
-      );
-    }, '');
-
-    document.getElementById('stories-list').innerHTML = `
-      <div class="stories-list">${html}</div>
-    `;
-  }
+  document.getElementById('stories-list').innerHTML = `
+    <div class="stories-list">${html}</div>
+  `;
+}
 
   populateBookmarkedStoriesListEmpty() {
     document.getElementById('stories-list').innerHTML = generateStoriesListEmptyTemplate();

@@ -1,2 +1,2 @@
-APP_URL= https://gyhlksn.github.io/dicoding-story/
+APP_URL= https://symphonious-twilight-ca025e.netlify.app/
 MAP_SERVICE_API_KEY=<api_key>

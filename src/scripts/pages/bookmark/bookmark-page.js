@@ -49,7 +49,7 @@ export default class BookmarkPage {
 
   const html = stories.reduce((accumulator, story) => {
     if (this.#map) {
-      const coordinate = [story.location.latitude, story.location.longitude];
+      const coordinate = [story.lat, story.lon];
       const markerOptions = { alt: story.title };
       const popupOptions = { content: story.title };
 
@@ -59,9 +59,8 @@ export default class BookmarkPage {
     return accumulator.concat(
       generateStoriesItemTemplate({
         ...story,
-        // Pastikan properti location yang diteruskan ke template adalah string placeName
-        location: story.location.placeName, // <-- PERUBAHAN DI SINI
-        storyerName: story.storyer.name,
+        location: `${story.lat}, ${story.lon}`, 
+        storyerName: story.name,
       }),
     );
   }, '');

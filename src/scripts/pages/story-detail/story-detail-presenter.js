@@ -84,15 +84,16 @@ export default class StoryDetailPresenter {
   }
 
   async showSaveButton() {
-    if (this.#isStorySaved()) {
-      this.#view.renderRemoveButton();
-      return;
-    }
+    const isSaved = await this.#isStorySaved();
 
+  if (isSaved) {
+    this.#view.renderRemoveButton();
+  } else {
     this.#view.renderSaveButton();
   }
+  }
 
-  #isStorySaved() {
-    return false;
+  async #isStorySaved() {
+    return !!(await this.#dbModel.getStoryById(this.#storyId));
   }
 }

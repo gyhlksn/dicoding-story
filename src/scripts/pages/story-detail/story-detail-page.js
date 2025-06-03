@@ -59,7 +59,7 @@ export default class StoryDetailPage {
     }
 
     // Actions buttons
-    this.#presenter.showSaveButton();
+    await this.#presenter.showSaveButton();
   }
 
   populateStoryDetailError(message) {
